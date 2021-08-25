@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Home from './components/Pages/Home';
+import MeatsPage from './components/Pages/MeatsPage';
+import CheckoutView from './components/Payment/CheckoutView';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import { AuthContext } from './contexts/AuthContex';
+import LoginForm from './components/Forms/LoginForm';
+import RegisterForm from './components/Forms/RegisterForm';
 
 function App() {
+
+  const { authState } = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+
+      <Route exact path='/' component={Home} />
+      <Route path='/products/meats' component={MeatsPage} />
+
+      <Route path='/login'>
+        {authState.isLogged ? <Redirect to="/" /> : <LoginForm />}
+      </Route>
+
+      <Route path='/register'>
+        {authState.isLogged ? <Redirect to="/" /> : <RegisterForm />}
+      </Route>      
+
+      <PrivateRoute>
+        <Route exact path='/checkout/cart' component={CheckoutView} />
+      </PrivateRoute>
+
+      <PrivateRoute>
+        <Route exact path='/checkout/payment' component={CheckoutView} />
+      </PrivateRoute>
+
+    </Switch>
   );
 }
 
