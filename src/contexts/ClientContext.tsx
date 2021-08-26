@@ -20,6 +20,8 @@ interface ClientContextPropss {
     cartState: ShoppingCart;
     addProductCart: (product: ItemProductClient) => void;
     deleteProductCart: (productId: string) => void;
+    increaseProductCantity: (productId: string) => void;
+    reduceProductCantity: (productId: string) => void;
 }
 
 export const ClientContext = createContext({} as ClientContextPropss);
@@ -57,11 +59,26 @@ const ClientContextProvider = ({ children }: { children: JSX.Element | JSX.Eleme
         })
     }
 
+    const increaseProductCantity = (productId: string) => {
+        dispatch({
+            type: 'increaseProductCantity',
+            payload: productId
+        })
+    }
+    const reduceProductCantity = (productId: string) => {
+        dispatch({
+            type: 'reduceProductCantity',
+            payload: productId
+        })
+    }
+
     return (
         <ClientContext.Provider value={{
             cartState,
             addProductCart,
-            deleteProductCart
+            deleteProductCart,
+            increaseProductCantity,
+            reduceProductCantity
         }}>
             {children}
         </ClientContext.Provider>

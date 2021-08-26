@@ -30,7 +30,7 @@ export const CarouselSlider = () => {
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src="https://res.cloudinary.com/dyhww1ai4/image/upload/v1629174743/ucaaen2zbkhtjcrmyulo.jpg" className="d-block w-100" style={{height: 450}} alt="..." />
+                    <img src="https://res.cloudinary.com/dyhww1ai4/image/upload/v1629934920/cuidado_e_higienejpg_ycsqu7.jpg" className="d-block w-100" style={{height: 450}} alt="..." />
                     <div className="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>

@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 export const addProductCart = async (product: ItemProductClient) => {
     await db.collection(`cart/${auth.currentUser?.uid}/oldCart`).doc(product.id).get()
         .then(docRef => {
-            if(docRef.exists){
+            if (docRef.exists) {
                 docRef.ref.update({
                     id: product.id,
                     cantity: firebase.firestore.FieldValue.increment(1)
@@ -17,5 +17,21 @@ export const addProductCart = async (product: ItemProductClient) => {
 }
 
 export const deleteProductCart = async (prodcutId: string) => {
-    await db.collection(`cart/${auth.currentUser?.uid}/oldCart`).doc(prodcutId).delete();
+    await db.collection(`cart/${auth.currentUser?.uid}/oldCart`).doc(prodcutId).get()
+        .then(docRef => {
+            if (docRef.exists) {
+                docRef.ref.delete();
+            }
+        })
+}
+
+export const reduceOrIncreaseProductCantity = async (prodcutId: string, reducer: number) => {
+    await db.collection(`cart/${auth.currentUser?.uid}/oldCart`).doc(prodcutId).get()
+        .then(docRef => {
+            if (docRef.exists) {
+                docRef.ref.update({
+                    cantity: firebase.firestore.FieldValue.increment(reducer)
+                })
+            }
+        })
 }

@@ -19,10 +19,10 @@ import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+    <Typography variant="body1" color="textSecondary" align="center">
+      {'Copyright © Luis Gonzalez - '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        JumboFood
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Información personal', 'Método de pago', 'Reviso de orden'];
+const steps = ['Información personal', 'Método de pago', 'Revisión de orden'];
 
 function getStepContent(step: any) {
 
